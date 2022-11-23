@@ -9,5 +9,5 @@ module.exports = function(app){
         next();
     });
 
-    app.post("/api/subscribe/user/email",controller.subscribe);
+    app.post("/api/course/subscribe/user",controller.subscribe);
 }

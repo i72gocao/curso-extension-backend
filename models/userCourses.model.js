@@ -1,15 +1,15 @@
-const { sequelize, Sequelize } = require(".");
+const {sequelize,Sequelize} = require(".")
 
 module.exports = (sequelize,Sequelize) => {
-    const PostCategories = sequelize.define("post_categories",{
+    const UserCourses = sequelize.define("user_courses",{
         id: {
-            type: Sequelize.INTEGER,
+            type:Sequelize.INTEGER,
             primaryKey: true,
             autoIncrement: true,
             allowNull: false
-        },
+        }
     },{
         timestamps: false
     });
-    return PostCategories;
+    return UserCourses;
 }

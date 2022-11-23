@@ -9,7 +9,3 @@ exports.userBoard = (req,res) => {
 exports.adminBoard = (req,res) => {
     res.status(200).send("Admin Content.");
 }
-
-exports.moderadorBoard = (req,res) => {
-    res.status(200).send("Moderador Content.")
-}

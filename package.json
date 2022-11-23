@@ -1,5 +1,5 @@
 {
-  "name": "blog-backend-project",
+  "name": "curso-extension-backend",
   "version": "0.0.0",
   "private": true,
   "scripts": {
@@ -8,7 +8,6 @@
   },
   "keywords": [
     "node.js",
-    "jwt",
     "authentication",
     "express",
     "mysql"

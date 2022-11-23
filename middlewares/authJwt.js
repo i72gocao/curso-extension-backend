@@ -50,39 +50,6 @@ isAdmin = (req,res,next) => {
     });
 }
 
-isModerador = (req,res,next) => {
-    User.findByPk(req.userId).then(user => {
-        user.getRoles().then(roles => {
-            loopRoles(roles,"moderador",next);
-
-            res.status(403).send({
-                message: "Es necesario tener el rol de moderador"
-            })
-        })
-    })
-}
-
-isModeradorOrAdmin = (req,res,next) => {
-    User.findByPk(req.userId).then(user => {
-        user.getRoles().then(roles => {
-            for (let i = 0; i < roles.length; i++) {
-                if(roles[i] === "admin"){
-                    next();
-                    return;
-                }
-                if(roles[i] === "moderador"){
-                    next();
-                    return;
-                }
-            }
-
-            res.status(403).send({
-                message: "Es necesario ser admin o moderador"
-            });
-        });
-    });
-}
-
 const loopRoles = (roles,role,next) => {
     for (let i = 0; i < roles.length; i++) {
         if(roles[i] === role){

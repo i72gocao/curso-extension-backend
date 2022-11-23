@@ -2,6 +2,11 @@ const { Sequelize } = require("sequelize");
 
 module.exports = (sequelize,Sequelize) => {
     const User = sequelize.define("users", {
+        fullname: {
+            type: Sequelize.STRING,
+            allowNull: false,
+            unique: true
+        },
         username: {
             type: Sequelize.STRING,
             allowNull: false,
@@ -10,9 +15,6 @@ module.exports = (sequelize,Sequelize) => {
         password:{
             type: Sequelize.STRING,
             allowNull: false,
-        },
-        avatar: {
-            type: Sequelize.STRING
         },
         email:{
             type: Sequelize.STRING,

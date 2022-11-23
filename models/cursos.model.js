@@ -1,5 +1,5 @@
 module.exports = (sequelize,Sequelize) => {
-    const Curso = sequelize.define("cursos", {
+    const Course = sequelize.define("cursos", {
         id: {
             type: Sequelize.INTEGER,
             primaryKey: true,
@@ -25,6 +25,10 @@ module.exports = (sequelize,Sequelize) => {
             type: Sequelize.DATE,
             allowNull: false
         },
+        fecha_limite_subscripcion:{
+            type: Sequelize.DATE,
+            allowNull: false
+        },
         min_participantes: {
             type: Sequelize.INTEGER,
             allowNull: false
@@ -33,14 +37,16 @@ module.exports = (sequelize,Sequelize) => {
             type: Sequelize.INTEGER,
             allowNull: false
         },
-        subs_participantes: {
-            type: Sequelize.INTEGER,
-            allowNull: true
-        },
+        //No hace falta, va en la tabla M:N crada entre cursos y usuarios
+        //subs_participantes: {
+            //Son los participantes que ya se han inscrito en el curso.
+            //type: Sequelize.INTEGER,
+            //allowNull: true
+        //},
         imagen_portada : {
             type: Sequelize.TEXT,
             allowNull: true
         }
     });
-    return Curso;
+    return Course;
 }

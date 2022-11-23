@@ -20,10 +20,10 @@ db.sequelize = sequelize;
 db.user = require("../models/user.model")(sequelize,Sequelize);
 db.role = require("../models/role.model")(sequelize,Sequelize);
 
-db.refreshToken = require("../models/refreshToken.model")(sequelize,Sequelize);
 db.subscribe = require("../models/subscribe.model")(sequelize,Sequelize);
 
 db.curso = require("../models/cursos.model")(sequelize,Sequelize);
+db.userCourses = require("../models/userCourses.model")(sequelize,Sequelize);
 
 db.role.belongsToMany(db.user, {
     through: "user_roles",
@@ -37,16 +37,19 @@ db.user.belongsToMany(db.role,{
     otherKey: "roleId"
 });
 
-db.refreshToken.belongsTo(db.user, {
-    foreignKey: 'userId',
-    targetKey: 'id'
+db.curso.belongsToMany(db.user,{
+    as: "user_",
+    through: db.userCourses,
+    foreignKey: "user_id",
+    otherKey: "course_id"
+});
+db.user.belongsToMany(db.curso,{
+    as: "curso_",
+    through: db.userCourses,
+    foreignKey:"course_id",
+    otherKey: "user_id"
 });
 
-db.user.hasOne(db.refreshToken,{
-    foreignKey: 'userId',
-    targetKey: 'id'
-});
-
-db.ROLES = ["user","admin","moderador"];
+db.ROLES = ["user","admin"];
 
 module.exports = db;
