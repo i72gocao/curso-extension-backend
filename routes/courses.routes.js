@@ -15,7 +15,7 @@ module.exports = function(app){
     
     app.post("/api/courses/modify-course",controller.modifyCourses);
     
-    app.post("/api/courses/get-courses",controller.getCoursesAll);
+    app.get("/api/courses/get-all-courses",controller.getCoursesAll);
     
     app.post("/api/courses/get-course",controller.getCoursesById);
 }

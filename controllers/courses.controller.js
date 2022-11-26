@@ -1,10 +1,10 @@
 const db = require("../models");
 
-const Curso = db.curso;
+const Course = db.course;
 
 //crear cursos
 exports.createCourses = (req,res,next) => {
-    Curso.create({
+    Course.create({
         
     })
 };
@@ -21,7 +21,14 @@ exports.modifyCourses = (req,res,next) => {
 
 //Obtener todos los cursos con fecha de inicio vigente
 exports.getCoursesAll = (req,res,next) => {
-
+    Course.findAll({
+        raw:true
+    }).then((course) => {
+        res.status(200).send({
+            status: "OK",   
+            data: course
+        })
+    })
 }
 
 //Obtener un curso por id

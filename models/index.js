@@ -22,7 +22,7 @@ db.role = require("../models/role.model")(sequelize,Sequelize);
 
 db.subscribe = require("../models/subscribe.model")(sequelize,Sequelize);
 
-db.curso = require("../models/cursos.model")(sequelize,Sequelize);
+db.course = require("./courses.model")(sequelize,Sequelize);
 db.userCourses = require("../models/userCourses.model")(sequelize,Sequelize);
 
 db.role.belongsToMany(db.user, {
@@ -37,18 +37,23 @@ db.user.belongsToMany(db.role,{
     otherKey: "roleId"
 });
 
-db.curso.belongsToMany(db.user,{
+db.course.belongsToMany(db.user,{
     as: "user_",
     through: db.userCourses,
-    foreignKey: "user_id",
-    otherKey: "course_id"
+    // foreignKey: "user_id",
+    // otherKey: "course_id"
 });
-db.user.belongsToMany(db.curso,{
+db.user.belongsToMany(db.course,{
     as: "curso_",
     through: db.userCourses,
-    foreignKey:"course_id",
-    otherKey: "user_id"
+    // foreignKey:"course_id",
+    // otherKey: "user_id"
 });
+
+// db.user.hasMany(db.userCourses);
+// db.userCourses.belongsTo(db.user);
+// db.course.hasMany(db.userCourses);
+// db.userCourses.belongsTo(db.course);
 
 db.ROLES = ["user","admin"];
 

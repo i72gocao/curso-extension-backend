@@ -9,6 +9,7 @@ module.exports = function (app){
         next();
     });
 
-    //app.post("/api/users/courses/add",controller.addCourseToUser);
-    app.post("/api/users/courses/add",controller.addUserToCourse);
+    // app.post("/api/users/courses/add",controller.addCourseToUser);
+    // app.post("/api/users/courses/add",controller.addUserCourse);
+    app.post("/api/users/courses/add",controller.addCoursesAndUsers);
 }

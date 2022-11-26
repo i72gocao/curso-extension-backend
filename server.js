@@ -25,13 +25,19 @@ app.use(express.urlencoded({ extended: true }));
 const db = require("./models");
 const Role = db.role;
 const User = db.user;
-const Course = db.curso;
+const Course = db.course;
+const UserCourse = db.userCourses;
+const Subscribe = db.subscribe;
 
 db.sequelize.sync({ force: true }).then(() => {
   initial();
   userAdmin();
   coursesData();
+  userCourses();
+  createMessageSubscribe();
 });
+
+
 
 function initial() {
   Role.create({
@@ -68,6 +74,14 @@ function userAdmin(){
     password: bcrypt.hashSync("12345678"),
     email: "user@uco.es"
   });
+
+  User.create({
+    id: 3,
+    fullname: "fulano fulano",
+    username: "osgod",
+    password: bcrypt.hashSync("12345678"),
+    email: "user123@uco.es"
+  });
 }
 
 function coursesData(){
@@ -81,7 +95,44 @@ function coursesData(){
     fecha_limite_subscripcion: "2022-12-15",
     min_participantes: 3,
     max_participantes: 10
+  });
+  Course.create({
+    id: 2,
+    titulo: "Seguridad Informatica",
+    descripcion: "Seguridad Informatica para beginners",
+    precio: 150.50,
+    fecha_inicio: "2022-12-25",
+    fecha_fin: "2023-03-30",
+    fecha_limite_subscripcion: "2022-12-15",
+    min_participantes: 3,
+    max_participantes: 10
+  });
+  Course.create({
+    id: 3,
+    titulo: "Machine Learning",
+    descripcion: "Machine Learning y data minning para beginners",
+    precio: 150.50,
+    fecha_inicio: "2022-12-25",
+    fecha_fin: "2023-03-30",
+    fecha_limite_subscripcion: "2022-12-15",
+    min_participantes: 5,
+    max_participantes: 20
   })
+}
+
+function userCourses(){
+  UserCourse.create({
+    userId:2,
+    courseId: 1,
+  });
+}
+
+function createMessageSubscribe(){
+    Subscribe.create({fullname:"Clark Kent",username:"Superman",email:"superman@uco.es"});
+    Subscribe.create({fullname:"Bruce Wayne",username:"Batman",email:"batman@uco.es"});
+    Subscribe.create({fullname:"Anakin Skywalker",username:"Darth Vader",email:"anakin@uco.es"});
+    Subscribe.create({fullname:"Goku Migato-no-gokui",username:"supersayajin",email:"supersayajin@uco.es"});
+    Subscribe.create({fullname:"Tony Stark",username:"ironman",email:"ironman@uco.es"});
 }
 
 app.get("/", (req, res) => {
@@ -90,6 +141,8 @@ app.get("/", (req, res) => {
 
 require("./routes/auth.routes")(app);
 require("./routes/user.routes")(app);
+require("./routes/courses.routes")(app);
 require("./routes/subscribe.routes")(app);
+require("./routes/userCourse.routes")(app);
 
 module.exports = app;
