@@ -1,4 +1,3 @@
-const {subscribe} = require("../models");
 const db = require("../models");
 const Subscribe = db.subscribe;
 

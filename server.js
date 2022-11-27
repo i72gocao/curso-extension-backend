@@ -3,6 +3,7 @@ const express = require("express");
 const path = require("path");
 const bodyParser = require("body-parser");
 const cors = require("cors");
+const multer = require('multer');
 
 var bcrypt = require("bcryptjs");
 
@@ -19,6 +20,9 @@ app.set("views", path.join(__dirname, "/"));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
+const directory = path.join(__dirname, '/uploads');
+app.use('/uploads', express.static(directory));
+
 // app.use(bodyParser.json());
 // app.use(bodyParser.urlencoded({ extended: false }));
 
@@ -28,6 +32,9 @@ const User = db.user;
 const Course = db.course;
 const UserCourse = db.userCourses;
 const Subscribe = db.subscribe;
+
+
+
 
 db.sequelize.sync({ force: true }).then(() => {
   initial();
