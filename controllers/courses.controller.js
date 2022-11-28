@@ -10,7 +10,7 @@ exports.createCourses = (req,res,next) => {
     req.body["imagen_portada"] = req.file.filename;
     delete req.body.id;
 
-    console.log("BODY: ",req.body);
+    // console.log("BODY: ",req.body);
     try {
         Course.create(req.body)
         .then((course) => {
@@ -40,7 +40,6 @@ exports.deleteCourses = (req,res,next) => {
 
 //Modificar curso
 exports.modifyCourses = (req,res,next) => {
-    // console.log("BODY: ",req.body);
     Course.update(req.body,{
         where: {
             id: req.body.id

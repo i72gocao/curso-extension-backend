@@ -47,13 +47,6 @@ exports.deleteRequest = (req,res,next) => {
 }
 
 exports.getCountAllMessage = (req,res,next) => {
-    // Model.findAll({
-    //     attributes: [
-    //       'foo',
-    //       [sequelize.fn('COUNT', sequelize.col('hats')), 'n_hats'],
-    //       'bar'
-    //     ]
-    //   });
     try {
         Subscribe.findAll({
             attributes:[[db.sequelize.fn("COUNT",db.sequelize.col('id')),'n_id']],
