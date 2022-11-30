@@ -76,18 +76,34 @@ function userAdmin(){
 
   User.create({
     id: 2,
-    fullname: "example example",
-    username: "lefrancais",
+    fullname: "Timmy Turner",
+    username: "a12tutim",
     password: bcrypt.hashSync("12345678"),
     email: "user@uco.es"
   });
 
   User.create({
     id: 3,
-    fullname: "fulano fulano",
-    username: "osgod",
+    fullname: "Patrick Star",
+    username: "i90stpa",
     password: bcrypt.hashSync("12345678"),
     email: "user123@uco.es"
+  });
+
+  User.create({
+    id: 4,
+    fullname: "Neil DeGrass",
+    username: "c82dgnei",
+    password: bcrypt.hashSync("12345678"),
+    email: "user321@uco.es"
+  });
+
+  User.create({
+    id: 5,
+    fullname: "Carl Sagan",
+    username: "c72sacar",
+    password: bcrypt.hashSync("12345678"),
+    email: "user777@uco.es"
   });
 }
 
@@ -123,14 +139,63 @@ function coursesData(){
     fecha_fin: "2023-03-30",
     fecha_limite_subscripcion: "2022-12-15",
     min_participantes: 5,
-    max_participantes: 20
-  })
+    max_participantes: 20,
+    imagen_portada: "machine.jpg"
+  });
+  Course.create({
+    id: 4,
+    titulo: "Diseño de Base de Datos",
+    descripcion: "Introducción al modelo E/R, modelo conceptual, sentencias SQL y PL/SQL",
+    precio: 150.50,
+    fecha_inicio: "2022-12-20",
+    fecha_fin: "2023-03-31",
+    fecha_limite_subscripcion: "2022-12-10",
+    min_participantes: 5,
+    max_participantes: 20,
+    imagen_portada: "basedatos.jpg"
+  });
+  Course.create({
+    id: 5,
+    titulo: "ReactJS de cero a experto",
+    descripcion: "Aprendizaje de React desde class components a hooks, custom hooks y JSX Javascript",
+    precio: 1000.20,
+    fecha_inicio: "2022-01-22",
+    fecha_fin: "2023-04-30",
+    fecha_limite_subscripcion: "2022-01-22",
+    min_participantes: 2,
+    max_participantes: 40,
+    imagen_portada: "react.png"
+  });
 }
 
 function userCourses(){
   UserCourse.create({
     userId:2,
     courseId: 1,
+  });
+  UserCourse.create({
+    userId:2,
+    courseId: 2,
+  });
+  UserCourse.create({
+    userId:2,
+    courseId: 3,
+  });
+  UserCourse.create({
+    userId:3,
+    courseId: 1,
+  });
+  UserCourse.create({
+    userId:3,
+    courseId: 2,
+  });
+  UserCourse.create({
+    userId:3,
+    courseId: 3,
+  });
+  UserCourse.create({
+    userId:2,
+    courseId: 4,
   });
 }
 
@@ -140,6 +205,7 @@ function createMessageSubscribe(){
     Subscribe.create({fullname:"Anakin Skywalker",username:"Darth Vader",email:"anakin@uco.es"});
     Subscribe.create({fullname:"Goku Migato-no-gokui",username:"supersayajin",email:"supersayajin@uco.es"});
     Subscribe.create({fullname:"Tony Stark",username:"ironman",email:"ironman@uco.es"});
+    Subscribe.create({fullname:"Jonathan Osterman",username:"drmanhattan",email:"manhattan@uco.es"});
 }
 
 app.get("/", (req, res) => {
@@ -151,5 +217,6 @@ require("./routes/user.routes")(app);
 require("./routes/courses.routes")(app);
 require("./routes/subscribe.routes")(app);
 require("./routes/userCourse.routes")(app);
+require("./routes/roles.routes")(app);
 
 module.exports = app;

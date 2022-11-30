@@ -50,5 +50,5 @@ module.exports = function(app){
     
     app.get("/api/courses/get-course/id",controller.getCoursesById);
 
-    app.post("/api/admin/load/files",upload.single('file'),controller.uploadFiles);
+    // app.post("/api/admin/load/files",upload.single('file'),controller.uploadFiles);
 }

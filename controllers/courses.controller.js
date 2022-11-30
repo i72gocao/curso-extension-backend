@@ -1,13 +1,11 @@
 const db = require("../models");
-
-
 const Course = db.course;
 
 //crear cursos
 exports.createCourses = (req,res,next) => {
-    
-    //Buscar si req.file.filename existe para poder guardarlo
-    req.body["imagen_portada"] = req.file.filename;
+    if(req.file)
+        req.body["imagen_portada"] = req.file.filename;
+
     delete req.body.id;
 
     // console.log("BODY: ",req.body);
@@ -84,36 +82,4 @@ exports.getCoursesById = (req,res,next) => {
     .catch(error => {
         res.status(500).send({message: error.message});
     })
-}
-
-exports.uploadFiles = async (req,res,next) => {
-    console.log("IMAGEN: ",req.file);
-    console.log("BODY: ",req.body);
-    console.log("Filename: ",req.file.filename);
-    req.body["imagen_portada"] = req.file.filename;
-    console.log("BODY: ",req.body);
-
-    // Course.create
-    // try {
-    //     if (!req.files) {
-    //       res.send({
-    //         status: false,
-    //         message: 'No file uploaded'
-    //       })
-    //     } else {
-    //       // Use the name of the input field (i.e. "avatar") to retrieve the uploaded file
-    //       let file = req.files.file
-    //         console.log("LLEGAS AQUI: ",req.files);
-    //       // Use the mv() method to place the file in the upload directory (i.e. "uploads")
-    //       //file.mv('./uploads/' + avatar.name)
-    
-    //       //send response
-    //       res.send({
-    //         status: true,
-    //         message: 'File is uploaded'
-    //       })
-    //     }
-    //   } catch (err) {
-    //     res.status(500).send(err)
-    //   }
 }

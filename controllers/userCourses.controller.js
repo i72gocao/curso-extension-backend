@@ -67,3 +67,21 @@ exports.addUserCourse = (req, res, next) => {
     });
   });
 };
+
+exports.getTotalUsersInCourses = (req,res,next) => {
+  
+  UserCourses.findAndCountAll({
+      where: {
+        courseId: req.headers.id
+      },
+      raw: true
+  }).then(data => {
+    res.status(200).send({
+      status: "OK",
+      data: data.count
+    })
+  })
+  .catch(error => {
+    res.status(500).send({message: error.message});
+  })
+}

@@ -12,4 +12,6 @@ module.exports = function (app){
     // app.post("/api/users/courses/add",controller.addCourseToUser);
     // app.post("/api/users/courses/add",controller.addUserCourse);
     app.post("/api/users/courses/add",controller.addCoursesAndUsers);
+
+    app.get("/api/users/courses/count",controller.getTotalUsersInCourses);
 }
