@@ -14,4 +14,6 @@ module.exports = function (app){
     app.post("/api/users/courses/add",controller.addCoursesAndUsers);
 
     app.get("/api/users/courses/count",controller.getTotalUsersInCourses);
+
+    app.delete("/api/users/courses/unsubscribe",controller.modifyInscription);
 }

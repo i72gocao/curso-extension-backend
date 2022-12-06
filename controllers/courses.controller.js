@@ -1,5 +1,8 @@
 const db = require("../models");
 const Course = db.course;
+const UserCourse = db.userCourses;
+const sequelize= db.Sequelize;
+const Op = db.Sequelize.Op;
 
 //crear cursos
 exports.createCourses = (req,res,next) => {
@@ -53,8 +56,14 @@ exports.modifyCourses = (req,res,next) => {
 //Obtener todos los cursos con fecha de inicio vigente
 exports.getCoursesAll = (req,res,next) => {
     Course.findAll({
+        where: {
+            fecha_limite_subscripcion: {
+                [Op.gte] : new Date().toISOString().slice(0,10)
+            }
+        },
         raw:true
     }).then((course) => {
+        console.log("Cursos: ",course)
         res.status(200).send({
             status: "OK",   
             data: course
@@ -62,6 +71,76 @@ exports.getCoursesAll = (req,res,next) => {
     })
     .catch(error => {
         res.status(500).send({message: error.message});
+    })
+}
+
+/*
+const budgetItems = await Item.findAll({
+  attributes: ["id", "amount", "category"],
+  where: {
+    budgetId: {
+      [Op.in]: sequelize.literal(
+        `(SELECT b.id FROM budgets b
+          WHERE b.startDate >= '2022-02-01'
+            AND b.endDate <= '2022-02-07'
+         )`
+      ),
+    },
+  },
+});
+
+*/
+
+//SELECT * FROM cursos_extension.courses where id not in (select courseId from cursos_extension.user_courses where userId = 2);
+exports.getCoursesByUserInHome = (req,res,next) => {
+    
+    Course.findAll({
+        where: {
+            [Op.not]: [
+                {
+                    id: {
+                         [Op.in] : sequelize.literal(`(select courseId from user_courses where userId = ${req.headers.id})`)
+                    }   
+                }
+            ]
+            
+        },
+        raw: true
+    }).then(data => {
+        
+        res.status(200).send({
+            status: "OK",
+            data: data
+        })
+    })
+    .catch(error => {
+        res.status(500).send({message: error.message});
+    })
+}
+
+exports.getCourseByUser = (req,res,next) => {
+    Course.findAll({
+        where: {
+            id : {
+                [Op.in] : sequelize.literal(`(select courseId from user_courses where userId = ${req.headers.id})`)
+            }
+        },
+        include: [{
+            attributes: ["queue"],
+            model: UserCourse,
+            where: {
+                userId: req.headers.id
+            } 
+        }],
+        raw: true
+    }).then(data => {
+        res.status(200).send({
+            status: "OK",
+            data: data
+        })
+    })
+    .catch(error => {
+        res.status(500).send({message: error.message})
     })
 }
 

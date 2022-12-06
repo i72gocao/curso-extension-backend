@@ -50,5 +50,8 @@ module.exports = function(app){
     
     app.get("/api/courses/get-course/id",controller.getCoursesById);
 
+    app.get("/api/courses/user/show-home",controller.getCoursesByUserInHome);
+    
+    app.get("/api/courses/user/list",controller.getCourseByUser);
     // app.post("/api/admin/load/files",upload.single('file'),controller.uploadFiles);
 }

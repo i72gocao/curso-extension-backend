@@ -25,16 +25,8 @@ exports.acceptUser = async (req,res) => {
             attributes: ["fullname","username","email"],
             raw: true
         }).then(subs => {
-            console.log(subs);
+            
             subs["password"] = bcrypt.hashSync("user123456");
-            console.log(subs);
-
-            // Subscribe.destroy({
-            //     where: {
-            //         id: req.body.id
-            //     }
-            // });
-
             User.create(subs)
             .then(user => {
                 res.status(200).send({

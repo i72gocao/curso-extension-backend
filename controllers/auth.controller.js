@@ -2,7 +2,7 @@ const db = require("../models");
 const config = require("../config/auth.config");
 //const User = db.user;//llama al modelo User
 //const Role = db.role;//llama al modelo Role
-const {user: User,role: Role} = db;
+const {user: User,role: Role, message: Message} = db;
 
 const Op = db.Sequelize.Op;
 
