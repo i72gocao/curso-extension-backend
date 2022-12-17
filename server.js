@@ -117,7 +117,7 @@ function coursesData(){
     precio: 150.50,
     fecha_inicio: "2023-01-25",
     fecha_fin: "2023-03-30",
-    fecha_limite_subscripcion: "2022-12-25",
+    fecha_limite_subscripcion: "2023-01-22",
     min_participantes: 1,
     max_participantes: 2
   });
@@ -151,7 +151,7 @@ function coursesData(){
     precio: 150.50,
     fecha_inicio: "2022-12-20",
     fecha_fin: "2023-03-31",
-    fecha_limite_subscripcion: "2022-12-10",
+    fecha_limite_subscripcion: "2023-01-10",
     min_participantes: 5,
     max_participantes: 20,
     imagen_portada: "basedatos.jpg"
@@ -183,20 +183,20 @@ function userCourses(){
     userId:2,
     courseId: 3,
   });
-  // UserCourse.create({
-  //   userId:3,
-  //   courseId: 1,
-  //   // queue: 1
-  // });
+  UserCourse.create({
+    userId:3,
+    courseId: 1,
+    queue: 1
+  });
   UserCourse.create({
     userId:4,
     courseId: 1,
   });
-  // UserCourse.create({
-  //   userId:5,
-  //   courseId: 1,
-  //   // queue: 1
-  // });
+  UserCourse.create({
+    userId:5,
+    courseId: 1,
+    queue: 1
+  });
   UserCourse.create({
     userId:3,
     courseId: 2,

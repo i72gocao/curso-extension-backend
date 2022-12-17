@@ -6,8 +6,11 @@ const Op = db.Sequelize.Op;
 
 //crear cursos
 exports.createCourses = (req,res,next) => {
+    
     if(req.file)
         req.body["imagen_portada"] = req.file.filename;
+    else
+        req.body["imagen_portada"] = null
 
     delete req.body.id;
 
@@ -37,10 +40,13 @@ exports.deleteCourses = (req,res,next) => {
         })
     })
     .catch(error => res.status(500).send({message: error.message}))
-}
+} 
 
 //Modificar curso
 exports.modifyCourses = (req,res,next) => {
+    //Se elimina el campo 'imagen_portada' ya que no pasa a modificacion en el formulario
+    delete req.body["imagen_portada"];
+
     Course.update(req.body,{
         where: {
             id: req.body.id

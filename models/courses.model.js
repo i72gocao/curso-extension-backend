@@ -14,7 +14,7 @@ module.exports = (sequelize,Sequelize) => {
             allowNull: true
         },
         precio: {
-            type: Sequelize.FLOAT,
+            type: Sequelize.DECIMAL(10,2),
             allowNull: false
         },
         fecha_inicio: {
