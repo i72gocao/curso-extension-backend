@@ -73,7 +73,7 @@ function userAdmin(){
     fullname: "admin admin",
     username: "admin",
     password: bcrypt.hashSync("12345678"),
-    email: "admin@example.com"
+    email: "admin@uco.es"
   });
 
   User.create({
@@ -119,7 +119,7 @@ function coursesData(){
     fecha_fin: "2023-03-30",
     fecha_limite_subscripcion: "2023-01-22",
     min_participantes: 1,
-    max_participantes: 2
+    max_participantes: 3
   });
   Course.create({
     id: 2,
@@ -171,10 +171,10 @@ function coursesData(){
 }
 
 function userCourses(){
-  UserCourse.create({
-    userId:2,
-    courseId: 1,
-  });
+  // UserCourse.create({
+  //   userId:2,
+  //   courseId: 1,
+  // });
   UserCourse.create({
     userId:2,
     courseId: 2,
@@ -186,7 +186,7 @@ function userCourses(){
   UserCourse.create({
     userId:3,
     courseId: 1,
-    queue: 1
+    // queue: 1
   });
   UserCourse.create({
     userId:4,
@@ -195,7 +195,7 @@ function userCourses(){
   UserCourse.create({
     userId:5,
     courseId: 1,
-    queue: 1
+    // queue: 1
   });
   UserCourse.create({
     userId:3,
